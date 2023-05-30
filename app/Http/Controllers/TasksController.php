@@ -6,7 +6,7 @@ use App\Models\Task;
 
 class TasksController extends Controller
 {
-    // getでmessages/にアクセスされた場合の「一覧表示処理」
+    // getでtasks/にアクセスされた場合の「一覧表示処理」
     public function index()
     {
         // メッセージ一覧を取得
@@ -18,7 +18,7 @@ class TasksController extends Controller
             ]);  
     }
 
-    // getでmessages/createにアクセスされた場合の「新規登録画面表示処理」
+    // getでtasks/createにアクセスされた場合の「新規登録画面表示処理」
     public function create()
     {
         $task = new Task;
@@ -29,11 +29,18 @@ class TasksController extends Controller
         ]);
     }
 
-    // postでmessages/にアクセスされた場合の「新規登録処理」
+    // postでtasks/にアクセスされた場合の「新規登録処理」
     public function store(Request $request)
     {
+        // バリデーション
+        $request->validate([
+            'status' => 'required|max:10',
+            'content' => 'required|max:255',
+        ]);
+        
         // メッセージを作成
         $task = new Task;
+        $task->status = $request->status;
         $task->content = $request->content;
         $task->save();
 
@@ -41,7 +48,7 @@ class TasksController extends Controller
         return redirect('/');
     }
 
-    // getでmessages/（任意のid）にアクセスされた場合の「取得表示処理」
+    // getでtasks/（任意のid）にアクセスされた場合の「取得表示処理」
     public function show($id)
     {
         // idの値でメッセージを検索して取得
@@ -54,7 +61,7 @@ class TasksController extends Controller
 
     }
 
-    // getでmessages/（任意のid）/editにアクセスされた場合の「更新画面表示処理」
+    // getでtasks/（任意のid）/editにアクセスされた場合の「更新画面表示処理」
     public function edit($id)
     {
         // idの値でメッセージを検索して取得
@@ -66,12 +73,19 @@ class TasksController extends Controller
         ]);
     }
 
-    // putまたはpatchでmessages/（任意のid）にアクセスされた場合の「更新処理」
+    // putまたはpatchでtasks/（任意のid）にアクセスされた場合の「更新処理」
     public function update(Request $request, $id)
     {
+        // バリデーション
+        $request->validate([
+            'status' => 'required|max:10',
+            'content' => 'required|max:255',
+        ]);
+        
         // idの値でメッセージを検索して取得
         $task = Task::findOrFail($id);
         // メッセージを更新
+        $task->status = $request->status;
         $task->content = $request->content;
         $task->save();
 
@@ -79,7 +93,7 @@ class TasksController extends Controller
         return redirect('/');
     }
 
-    // deleteでmessages/（任意のid）にアクセスされた場合の「削除処理」
+    // deleteでtasks/（任意のid）にアクセスされた場合の「削除処理」
     public function destroy($id)
     {
         // idの値でメッセージを検索して取得
