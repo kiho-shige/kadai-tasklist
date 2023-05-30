@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MessagesController;
+use App\Http\Controllers\TasksController;
 
-Route::get('/', [MessagesController::class, 'index']);
-Route::resource('messages', MessagesController::class);
+Route::get('/', [TasksController::class, 'index']);
+Route::resource('tasks', TasksController::class);
