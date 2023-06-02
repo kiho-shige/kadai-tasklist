@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MicropostsController; 
 
 /*
 |--------------------------------------------------------------------------
@@ -13,13 +14,13 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/', [MicropostsController::class, 'index']);
 
-Route::get('/', function () {
-    return view('dashboard');
-});
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [MicropostsController::class, 'index'])->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::resource('users', UsersController::class, ['only' => ['index', 'show']]);
+    Route::resource('microposts', MicropostsController::class, ['only' => ['store', 'destroy']]);
+});
