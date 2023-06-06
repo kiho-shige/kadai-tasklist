@@ -13,11 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('microposts', function (Blueprint $table) {
-            $table->id();
+        Schema::table('tasks', function (Blueprint $table) {
+            //$table->id();
             $table->unsignedBigInteger('user_id');
-            $table->string('content');
-            $table->timestamps();
+            //$table->string('content');
+            //$table->timestamps();
 
             // 外部キー制約
             $table->foreign('user_id')->references('id')->on('users');
@@ -32,6 +32,6 @@ return new class extends Migration
     public function down()
     {
         $table->dropForeign('tasks_user_id_foreign');
-        Schema::dropIfExists('tasks');
+        Schema::dropIfExists('user_id');
     }
 };
