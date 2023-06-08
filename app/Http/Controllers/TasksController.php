@@ -57,16 +57,16 @@ class TasksController extends Controller
         ]);
         
         // 前のURLへリダイレクトさせる
-        return back();
+        //return back();
         
         /* メッセージを作成
         $task = new Task;
         $task->status = $request->status;
         $task->content = $request->content;
-        $task->save();
+        $task->save();  */
 
         // トップページへリダイレクトさせる
-        return redirect('/'); */
+        return redirect('/');
     }
 
     // getでtasks/（任意のid）にアクセスされた場合の「取得表示処理」
