@@ -1,4 +1,4 @@
-@if (Auth::id() == $user->id)
+
     <div class="mt-4">
         <form method="POST" action="{{ route('tasks.store') }}">
             @csrf
@@ -14,4 +14,3 @@
             <button type="submit" class="btn btn-primary btn-block normal-case">Post</button>
         </form>
     </div>
-@endif

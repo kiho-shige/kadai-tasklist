@@ -17,6 +17,15 @@ console_command = "php /var/www/html/artisan tinker"
   LOG_CHANNEL = "stderr"
   LOG_LEVEL = "info"
   LOG_STDERR_FORMATTER = "Monolog\\Formatter\\JsonFormatter"
+  
+  APP_URL = "https://fly.io/apps/dark-voice-5544.fly.dev"
+  APP_NAME = "Laravel"
+  APP_DEBUG = false
+  DB_CONNECTION = "pgsql"
+  DB_HOST = "db.realuxhnqzpcphbpgjiu.supabase.co"
+  DB_PORT = 5432
+  DB_DATABASE = "postgres"
+  DB_USERNAME = "postgres"
 
 [http_service]
   internal_port = 8080
